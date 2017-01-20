@@ -6,7 +6,7 @@ var teclas = {
 };
 
 //Evento para detectar la tecla pulsada:
-document.addEventListener("keydown", dibujarTeclado);
+document.getElementById("canvas").addEventListener("mousedown", dibujarMouse);
 var x = 100;
 var y = 100;
 var papel = document.getElementById("canvas").getContext("2d");
@@ -29,29 +29,13 @@ function dibujar(lienzo, color, posIniX, posIniY, posFinX, posFinY) {
   //Cerrar el trazo:
   lienzo.closePath();
 }
-function dibujarTeclado(oEvent) {
-  console.log(oEvent);
+function dibujarMouse(oEvent) {
+  console.log(oEvent.x);
+  console.log(oEvent.y);
   //Idenificar la tecla pulsada:
   var colorcito = "blue";
   var cantidadPasos = 5;
-  switch (oEvent.keyCode) {
-    case teclas.UP:
-        dibujar(papel, colorcito, x, y, x, y - cantidadPasos);
-        y = y - cantidadPasos;
-      break;
-    case teclas.DOWN:
-      dibujar(papel, colorcito, x, y, x, y + cantidadPasos);
-      y = y + cantidadPasos;
-      break;
-    case teclas.LEFT:
-      dibujar(papel, colorcito, x, y, x - cantidadPasos, y);
-      x = x - cantidadPasos;
-      break;
-    case teclas.RIGHT:
-      dibujar(papel, colorcito, x, y, x + cantidadPasos, y);
-      x = x + cantidadPasos;
-      break;
-    default:
-
-  }
+  dibujar(papel, colorcito, x, y, oEvent.x, oEvent.y);
+  x = oEvent.x;
+  y = oEvent.y;
 }
